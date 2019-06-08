@@ -24,5 +24,5 @@ The file [main.cpp](main.cpp) will do a molecular dynamics simulation of Carbon 
 ## License
 This project is licensed under the MIT License - see the [LICENSE.md](LICENSE.md) file for details
 
-### Author 
+## Author 
 * [Akash Meshram](https://github.com/akashmeshram)
