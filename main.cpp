@@ -1,16 +1,7 @@
-#include <iostream>
-#include <vector>
-#include <cmath>
-#include <cstdlib>
-#include <ctime>
-#include <list>
-#include <vector>
-#include <iterator>
-#include <fstream>
-#include <string>
-#include <functional>
+#include <bits/stdc++.h>
 #include "vec.h"
 #include "mol.h"
+#include "ParamsOfCarbon.h"
 using namespace std;
 
 double detaT = 0.002 ;
@@ -24,24 +15,6 @@ int total = 40;
 Mol mole[40]; /*Array for number of Molecules*/
 double uSum, virSum;
 double kinEnergy, totEnergy, pressure = 0.0;
-
-/* Tersoff Parameters for Carbon */
-double c = 3.8049e4,
-  d = 4.3484,
-  lam3 = 0,
-  Mu = 2.2119,
-  Lam = 3.4879,
-  lam2 = 2.2119,
-  lam1 = 3.4879,
-  beta = 1.5724e-7,
-  h = -0.57058,
-  R = 1.8,
-  S = 2.1,
-  D = 0.15,
-  m = 3,
-  n = 0.72751,
-  A = 1393.6,
-  B = 346.74;
 
 /* Function Declrations */
 void setup();
@@ -66,9 +39,7 @@ int main(int argc, char
   int i;
   while (loop) {
     simulate();
-    if (steps > 1000) {
-      loop = 0;
-    }
+    if (steps > 1000) loop = 0;
   }
   return 0;
 }
@@ -84,8 +55,7 @@ void split(const string & s, char c,
     i = ++j;
     j = s.find(c, j);
 
-    if (j == string::npos)
-      v.push_back(s.substr(i, s.length()));
+    if (j == string::npos)  v.push_back(s.substr(i, s.length()));
   }
 }
 
@@ -118,7 +88,7 @@ void initVel() {
     b = rand() % 200 - 100;
     c = rand() % 200 - 100;
     mag = sqrt(a * a + b * b + c * c);
-    double velMag = sqrt(2 * (1. - 1. / total) * temperature);
+    double velMag = sqrt(2 * (1. - (1. / total)) * temperature);
     // cout << mag << endl;
     a = (a / mag) * velMag;
     b = (b / mag) * velMag;
@@ -167,8 +137,10 @@ void computeForce() {
   double cdSqr = cSqr / dSqr;
   double invn2 = -1.0 / 2.0 / n;
 
-  double fCsave[40][40], fAsave[40][40], fRsave[40][40],
-    rd[40][40], dfCdrsave[40][40], dfAdrsave[40][40], dfRdrsave[40][40];
+  double fCsave[40][40], dfCdrsave[40][40], 
+         fAsave[40][40], dfAdrsave[40][40], 
+         fRsave[40][40], dfRdrsave[40][40],
+         rd[40][40];
   vector < int > nPos;
   createVector ru[40][40], rv[40][40];
 
@@ -185,15 +157,9 @@ void computeForce() {
 
   double dfCdr, dfAdr, dfRdr, force;
 
-  for(i=0; i < 40; i++){
-    for(j=0; j < 40; j++){
-      for(k=0; k < 40; k++){
-        saveTheta[i][j][k] = 0;
-        gSave[i][j][k] = 0;
-        dgSave[i][j][k] = 0;
-      }
-    }
-  }
+  memset(saveTheta, 0, sizeof saveTheta);
+  memset(gSave, 0, sizeof gSave);
+  memset(dgSave, 0, sizeof dgSave);
 
   for (i = 0; i < total; i++) {
 
@@ -334,13 +300,13 @@ void computeForce() {
 
 /* Updating parameters */
 void update() {
+
   for (int i = 0; i < total; ++i) {
     mole[i].pos = mole[i].pos + mole[i].vel * 0.5 *  detaT +  mole[i].acc * 0.5 * detaT * detaT;
     mole[i].vel = mole[i].vel + mole[i].acc * 0.5 * detaT;
-
   }
-  checkBoundary();
 
+  checkBoundary();
   computeForce();
 
   for (int i = 0; i < total; ++i) {

@@ -3,6 +3,9 @@ Carbon nanotubes is allotrope of carbon with a cylindrical nanostructure. Here i
 by simulation by construction tersoff potential from scratch. The Tersoff potential is a three-body 
 potential function which icludes an angular contribution of the force.
 
+# About Tersoff Potential
+It is a molecular dynamics technique that solves numerically a multi-body problem of mechanics. Here, it is applied to the description of velocities and positions of carbon atoms disrupted in the nanotube structure, as a function of time. From the initial position and velocity of the atoms, and the forces of interaction between them, the microscopic behavior of the system is computed by solving differential equations of motion. The applied potential technique here is deterministic (in the limits of the computer capabilities) since no stochastic factors are involved
+
 ## Getting Started
 The file [main.cpp](main.cpp) will do a molecular dynamics simulation of Carbon Nanotube.
 
@@ -17,6 +20,27 @@ The file [main.cpp](main.cpp) will do a molecular dynamics simulation of Carbon 
 * **stepAvg** - *Average time for showing result*
 * **regionZ** - *region of axial length*
 * **temperature** - *Temperature of system*
+
+## Parameters of Tersoff Potential for atoms of carbon
+|Parameter| value|
+| ------------- |:-------------:|
+| c | 3.8049e4 |
+|d | 4.3484|
+|lam3 | 0|
+|Mu | 2.2119|
+|Lam(Å<sup>-1</sup>) | 3.4879|
+|lam2(Å<sup>-1</sup>) | 2.2119|
+|lam1(Å<sup>-1</sup>) | 3.4879|
+|beta | 1.5724e-7|
+|h | -0.57058|
+|R(Å) | 1.8|
+|S(Å) | 2.1|
+|D | 0.15|
+|m | 3|
+|n | 0.72751|
+|A(eV) | 1393.6|
+|B(eV) | 346.74|
+
 
 ## Built With
 * [C++](https://isocpp.org/)
