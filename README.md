@@ -18,6 +18,27 @@ The file [main.cpp](main.cpp) will do a molecular dynamics simulation of Carbon 
 * **regionZ** - *region of axial length*
 * **temperature** - *Temperature of system*
 
+## Parameters of Tersoff Potential for atoms of carbon
+|Parameter| value|
+| ------------- |:-------------:|
+| c | 3.8049e4 |
+|d | 4.3484|
+|lam3 | 0|
+|Mu | 2.2119|
+|Lam(Å<sup>-1</sup>) | 3.4879|
+|lam2(Å<sup>-1</sup>) | 2.2119|
+|lam1(Å<sup>-1</sup>) | 3.4879|
+|beta | 1.5724e-7|
+|h | -0.57058|
+|R(Å) | 1.8|
+|S(Å) | 2.1|
+|D | 0.15|
+|m | 3|
+|n | 0.72751|
+|A(eV) | 1393.6|
+|B(eV) | 346.74|
+
+
 ## Built With
 * [C++](https://isocpp.org/)
 
